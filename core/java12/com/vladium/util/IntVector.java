@@ -32,7 +32,8 @@ final class IntVector implements Cloneable
     public int get (final int index)
     {
         if (index > m_size - 1)
-            throw new IndexOutOfBoundsException ("get[" + index + "] on vector of size " + m_size);                
+            throw new IndexOutOfBoundsException ("get[" + index + "] on vector of size " + m_size);
+                
         return m_values [index];
     }
     

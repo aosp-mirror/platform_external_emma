@@ -11,9 +11,6 @@ package com.vladium.util.exit;
 import java.util.HashMap;
 import java.util.Map;
 
-import sun.misc.Signal;
-import sun.misc.SignalHandler;
-
 import com.vladium.util.IJREVersion;
 import com.vladium.util.Property;
 import com.vladium.emma.IAppConstants;
@@ -39,10 +36,6 @@ abstract class ExitHookManager implements IJREVersion
             if (JRE_1_3_PLUS)
             {
                 s_singleton = new JRE13ExitHookManager ();
-            }
-            else if (JRE_SUN_SIGNAL_COMPATIBLE)
-            {
-                s_singleton = new SunJREExitHookManager ();
             }
             else
             {
@@ -123,128 +116,6 @@ abstract class ExitHookManager implements IJREVersion
         private final Map /* Runnable->Thread */ m_exitThreadMap;
         
     } // end of nested class
-    
-    
-    private static final class SunJREExitHookManager extends ExitHookManager
-    {
-        public synchronized boolean addExitHook (final Runnable runnable)
-        {
-            if ((runnable != null) && ! m_signalHandlerMap.containsKey (runnable))
-            {
-                final INTSignalHandler handler = new INTSignalHandler (runnable);
-                
-                try
-                {
-                    handler.register ();
-                    m_signalHandlerMap.put (runnable, handler); // TODO: use identity here
-                    
-                    return true;
-                }
-                catch (Throwable t)
-                {
-                    System.out.println ("exception caught while adding a shutdown hook:");
-                    t.printStackTrace (System.out);
-                }
-            }
-            
-            return false;
-        }
-        
-        public synchronized boolean removeExitHook (final Runnable runnable)
-        {
-            if (runnable != null)
-            {
-                final INTSignalHandler handler = (INTSignalHandler) m_signalHandlerMap.get (runnable);  // TODO: use identity here
-                if (handler != null)
-                {
-                    try
-                    {
-                        handler.unregister ();
-                        m_signalHandlerMap.remove (runnable);
-                        
-                        return true;
-                    }
-                    catch (Exception e)
-                    {
-                        System.out.println ("exception caught while removing a shutdown hook:");
-                        e.printStackTrace (System.out);
-                    }
-                }
-            }
-            
-            return false;
-        }
-        
-        SunJREExitHookManager ()
-        {
-            m_signalHandlerMap = new HashMap ();
-        }
-        
-        
-        private final Map /* Runnable->INTSignalHandler */ m_signalHandlerMap;
-        
-    } // end of nested class
-    
-    
-    private static final class INTSignalHandler implements SignalHandler
-    {
-        public synchronized void handle (final Signal signal)
-        {
-            if (m_runnable != null)
-            {
-                try
-                {
-                    m_runnable.run ();
-                }
-                catch (Throwable ignore) {}
-            }
-            m_runnable = null;
-            
-            if ((m_previous != null) && (m_previous != SIG_DFL) && (m_previous != SIG_IGN))
-            {
-                try
-                {
-                    // this does not work:
-                    //Signal.handle (signal, m_previous);
-                    //Signal.raise (signal);
-                    
-                    m_previous.handle (signal);
-                }
-                catch (Throwable ignore) {}
-            }
-            else
-            {
-                System.exit (0);
-            }
-        }
-        
-        INTSignalHandler (final Runnable runnable)
-        {
-            m_runnable = runnable;
-        }
-       
-        synchronized void register ()
-        {
-            m_previous = Signal.handle (new Signal ("INT"), this);
-        }
-        
-        synchronized void unregister ()
-        {
-//            if (m_previous != null)
-//            {
-//                Signal.handle (new Signal ("INT"), m_previous);
-//                m_previous = null;
-//            }
-
-            m_runnable = null;
-        }
-
-
-        private Runnable m_runnable;
-        private SignalHandler m_previous;
-        
-    } // end of nested class
-    
     
     private static ExitHookManager s_singleton;
     

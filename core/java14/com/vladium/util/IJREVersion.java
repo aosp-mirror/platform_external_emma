@@ -82,14 +82,6 @@ interface IJREVersion
             _JRE_1_4_PLUS = temp;
             
             temp = false;
-            try
-            {
-                Class.forName ("sun.misc.Signal");
-                Class.forName ("sun.misc.SignalHandler");
-                
-                temp = true;
-            }
-            catch (Throwable ignore) {}
             
             _JRE_SUN_SIGNAL_COMPATIBLE = temp;
         }
