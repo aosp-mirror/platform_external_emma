@@ -7,7 +7,7 @@ LOCAL_SRC_FILES := $(call all-java-files-under, core)
 
 LOCAL_MODULE := emma
 
-LOCAL_MODULE_TAGS := tests
+LOCAL_MODULE_TAGS := optional
 
 LOCAL_JAVA_RESOURCE_DIRS := core/res
 
