@@ -21,7 +21,7 @@
 
 'r', 'report':
 	optional, mergeable, values: 1,
-	'<list of {txt|html|xml}>',
+	'<list of {txt|html|lcov|xml}>',
 	"coverage report type list";
 
 'sp', 'sourcepath':

@@ -47,7 +47,7 @@ final class reportTask extends FileTask implements IReportProperties, IReportEnu
             
             if ((reportTypes == null) || (reportTypes.length == 0)) // no "txt" default for report processor
                 throw (BuildException) newBuildException (getTaskName ()
-                    + ": no report types specified: provide at least one of <txt>, <html>, <xml> nested elements", location).fillInStackTrace ();
+                    + ": no report types specified: provide at least one of <txt>, <html>, <lcov>, <xml> nested elements", location).fillInStackTrace ();
 
             String [] files = getDataPath (true);
             if ((files == null) || (files.length == 0))

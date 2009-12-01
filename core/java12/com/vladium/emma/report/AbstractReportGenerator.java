@@ -43,6 +43,8 @@ abstract class AbstractReportGenerator extends AbstractItemVisitor
         
         if ("html".equals (type))
             return new com.vladium.emma.report.html.ReportGenerator ();
+        if ("lcov".equals (type))
+            return new com.vladium.emma.report.lcov.ReportGenerator ();
         else if ("txt".equals (type))
             return new com.vladium.emma.report.txt.ReportGenerator ();
         else if ("xml".equals (type))

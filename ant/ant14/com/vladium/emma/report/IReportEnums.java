@@ -33,6 +33,7 @@ interface IReportEnums
         {
             "txt",
             "html",
+            "lcov",
             "xml",
         };
 
