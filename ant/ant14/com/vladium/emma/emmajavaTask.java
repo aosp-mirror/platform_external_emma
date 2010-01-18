@@ -19,6 +19,7 @@ import com.vladium.emma.report.ReportCfg;
 import com.vladium.emma.report.IReportEnums.DepthAttribute;
 import com.vladium.emma.report.IReportEnums.UnitsTypeAttribute;
 import com.vladium.emma.report.ReportCfg.Element_HTML;
+import com.vladium.emma.report.ReportCfg.Element_LCOV;
 import com.vladium.emma.report.ReportCfg.Element_TXT;
 import com.vladium.emma.report.ReportCfg.Element_XML;
 
@@ -471,6 +472,11 @@ class emmajavaTask extends Java
         return m_reportCfg.createTxt ();
     }
     
+    public final Element_LCOV createLcov ()
+    {
+        return m_reportCfg.createLcov ();
+    }
+
     public final Element_HTML createHtml ()
     {
         return m_reportCfg.createHtml ();
