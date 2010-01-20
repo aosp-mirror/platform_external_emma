@@ -7,13 +7,13 @@ LOCAL_PATH := $(my-dir)
 # ============================================================
 include $(CLEAR_VARS)
 
-LOCAL_SRC_FILES := $(call all-java-files-under, core)
+LOCAL_SRC_FILES := $(call all-java-files-under, core pregenerated)
 
 LOCAL_MODULE := emma
 
 LOCAL_MODULE_TAGS := optional
 
-LOCAL_JAVA_RESOURCE_DIRS := core/res
+LOCAL_JAVA_RESOURCE_DIRS := core/res pregenerated/res
 
 LOCAL_NO_EMMA_INSTRUMENT := true
 
@@ -25,10 +25,10 @@ include $(BUILD_JAVA_LIBRARY)
 # ============================================================
 include $(CLEAR_VARS)
 
-LOCAL_SRC_FILES := $(call all-java-files-under, core)
+LOCAL_SRC_FILES := $(call all-java-files-under, core pregenerated)
 
 LOCAL_MODULE := emmalib
 
-LOCAL_JAVA_RESOURCE_DIRS := core/res
+LOCAL_JAVA_RESOURCE_DIRS := core/res pregenerated/res
 
 include $(BUILD_HOST_JAVA_LIBRARY)
