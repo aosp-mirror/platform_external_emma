@@ -195,6 +195,24 @@ class ReportCfg implements IReportProperties
     
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     
+    public static class Element_LCOV extends Element
+    {
+        protected final String getType ()
+        {
+            return TYPE;
+        }
+
+        Element_LCOV (final Task task, final IProperties settings)
+        {
+            super (task, settings);
+        }
+
+        static final String TYPE = "lcov";
+
+    } // end of nested class
+
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
     public static class Element_XML extends Element
     {
         protected final String getType ()
@@ -308,6 +326,12 @@ class ReportCfg implements IReportProperties
                                                      new Element_TXT (m_task, m_settings));
     }
     
+    public Element_LCOV createLcov ()
+    {
+        return (Element_LCOV) addCfgElement (Element_LCOV.TYPE,
+                                                     new Element_LCOV (m_task, m_settings));
+    }
+
     public Element_HTML createHtml ()
     {
         return (Element_HTML) addCfgElement (Element_HTML.TYPE,

@@ -16,6 +16,7 @@ import com.vladium.util.IProperties;
 import com.vladium.emma.ant.FileTask;
 import com.vladium.emma.ant.SuppressableTask;
 import com.vladium.emma.report.ReportCfg.Element_HTML;
+import com.vladium.emma.report.ReportCfg.Element_LCOV;
 import com.vladium.emma.report.ReportCfg.Element_TXT;
 import com.vladium.emma.report.ReportCfg.Element_XML;
 
@@ -104,6 +105,11 @@ final class reportTask extends FileTask implements IReportProperties, IReportEnu
         return m_reportCfg.createTxt ();
     }
     
+    public Element_LCOV createLcov ()
+    {
+        return m_reportCfg.createLcov ();
+    }
+
     public Element_HTML createHtml ()
     {
         return m_reportCfg.createHtml ();
