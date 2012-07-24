@@ -17,7 +17,9 @@ LOCAL_JAVA_RESOURCE_DIRS := core/res pregenerated/res
 
 LOCAL_NO_EMMA_INSTRUMENT := true
 
-include $(BUILD_JAVA_LIBRARY)
+LOCAL_SDK_VERSION := 8
+
+include $(BUILD_STATIC_JAVA_LIBRARY)
 
 
 
