@@ -15,9 +15,9 @@ LOCAL_MODULE_TAGS := optional
 
 LOCAL_JAVA_RESOURCE_DIRS := core/res pregenerated/res
 
-LOCAL_NO_EMMA_INSTRUMENT := true
+LOCAL_SDK_VERSION := 8
 
-include $(BUILD_JAVA_LIBRARY)
+include $(BUILD_STATIC_JAVA_LIBRARY)
 
 
 
