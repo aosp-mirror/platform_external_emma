@@ -17,6 +17,8 @@ LOCAL_JAVA_RESOURCE_DIRS := core/res pregenerated/res
 
 LOCAL_SDK_VERSION := 9
 
+LOCAL_ERROR_PRONE_FLAGS := -Xep:MissingOverride:OFF
+
 include $(BUILD_STATIC_JAVA_LIBRARY)
 
 
@@ -30,5 +32,7 @@ LOCAL_SRC_FILES := $(call all-java-files-under, core pregenerated)
 LOCAL_MODULE := emmalib
 
 LOCAL_JAVA_RESOURCE_DIRS := core/res pregenerated/res
+
+LOCAL_ERROR_PRONE_FLAGS := -Xep:MissingOverride:OFF
 
 include $(BUILD_HOST_JAVA_LIBRARY)
