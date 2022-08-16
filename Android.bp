@@ -32,5 +32,8 @@ java_library {
     errorprone: {
         javacflags: ["-Xep:MissingOverride:OFF"],
     },
+    lint: {
+        warning_checks: ["SuspiciousIndentation"],
+    },
     host_supported: true,
 }
