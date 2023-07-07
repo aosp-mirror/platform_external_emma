@@ -30,7 +30,14 @@ java_library {
     ],
     sdk_version: "9",
     errorprone: {
-        javacflags: ["-Xep:MissingOverride:OFF"],
+        javacflags: [
+            "-Xep:MissingOverride:OFF",
+            "-Xep:ComparableType:WARN",
+            "-Xep:ReturnValueIgnored:WARN",
+        ],
+    },
+    lint: {
+        warning_checks: ["SuspiciousIndentation"],
     },
     host_supported: true,
 }
